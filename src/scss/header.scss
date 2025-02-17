@@ -1,0 +1,56 @@
+header{
+    background-image: url(../assets/fondo.jpg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    .menu {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        color: white;
+
+        h1{
+            font-family: 'Raleway';
+            font-weight: 400;
+        }
+    
+        ul{
+            li{
+                list-style-type: none;
+                a{
+                    text-decoration: none;
+                    color: white;
+                    padding-left: 2rem;
+                }
+            }
+        }
+    }
+    
+    .search{
+        padding: 5rem 0;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        position: relative;
+    
+        input{
+            width: 70%;
+            border-radius: 22px;
+            border: 1px solid black;
+            height: 1.3rem;
+        }
+    
+        select {
+            width: 50%;
+            display: block;
+        }
+    
+    
+    }
+    
+    
+}
+
