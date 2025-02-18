@@ -1,40 +1,41 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const searchImg = createAsyncThunk("unsplash/searchImg", async () => {
+export const imgGalery = createAsyncThunk("unsplash/imgGalery", async () => {
     try {
-        const response = await fetch(`https://api.unsplash.com/search/photos?page=1&query=office&client_id=wpiiT6tN2Rrm_2kKkwi7cT4xAMdPk7Q3KdB1gx4PD5c`);
+        const response = await fetch(`https://api.unsplash.com/search/photos?page=1&query=balon&client_id=wpiiT6tN2Rrm_2kKkwi7cT4xAMdPk7Q3KdB1gx4PD5c`);
+        
         const data = await response.json();
-        return data;
+        return data.results;
     } catch (error) {
         throw new Error(error.message);
     }
 });
 
 const initialState = {
-    imgSearch: [], 
+    images: [], 
     loading: false,
     error: null,
 };
 
-const searchSlice = createSlice({
-    name: "search",
+const galerySlice = createSlice({
+    name: "galery",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(searchImg.pending, (state) => {    
+            .addCase(imgGalery.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(searchImg.fulfilled, (state, action) => {
-                state.imgSearch = action.payload;
+            .addCase(imgGalery.fulfilled, (state, action) => {
+                state.images = action.payload;
                 state.loading = false;
             })
-            .addCase(searchImg.rejected, (state, action) => {
+            .addCase(imgGalery.rejected, (state, action) => {
                 state.error = action.error.message;
                 state.loading = false;
             });
     },
 });
 
-export default searchSlice.reducer;
+export default galerySlice.reducer;
