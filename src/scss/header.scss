@@ -45,7 +45,7 @@ header{
     
         select {
             width: 50%;
-            display: block;
+            // display: block;
         }
     
     
@@ -54,3 +54,30 @@ header{
     
 }
 
+@media only screen and (min-width: 768px) { 
+    header{
+        background-image: url(../assets/fondo.jpg);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        
+        .search{
+            padding: 5rem 0;
+            gap: 2rem;
+            position: relative;
+            
+            input{
+                width: 50%;
+                border-radius: 22px;
+                border: 1px solid black;
+                height: 2rem;
+            }
+            
+            select {
+                width: 30%;
+            }
+            
+            
+        }
+    } 
+}
