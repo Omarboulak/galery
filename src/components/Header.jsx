@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from 'react-router-dom';
+import Search from "./Search";
 import '../scss/header.scss';
 
 function Header(){
@@ -17,7 +18,7 @@ function Header(){
             </div>
 
             <div className="search">
-                <input type="text" />
+                <Search />
                 <select >
                     <option value="heigt">heigt</option>
                     <option value="with">with</option>
