@@ -37,12 +37,27 @@ header{
         gap: 2rem;
         position: relative;
     
-        input{
+        .search-cont{
+            position: relative;
             width: 70%;
-            border-radius: 22px;
-            border: 1px solid black;
-            height: 1.3rem;
-            padding-left: 1rem;
+            
+            input{
+                width: 100%;
+                border-radius: 22px;
+                border: 1px solid black;
+                height: 1.3rem;
+                padding-left: 1rem;
+            }
+
+            button{
+                position: absolute;
+                right: 0;
+                top: 2px;
+                width: 1.3rem;
+                height: 1.3rem;
+                border-radius: 50%;
+                border: 0;
+            }
         }
     
         select {

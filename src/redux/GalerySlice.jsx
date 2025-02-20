@@ -3,10 +3,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const imgGalery = createAsyncThunk("ramdom/imgGalery", async (query) => {
     let response;
 
-    if (query ) {
-        response = await fetch(`https://api.unsplash.com/search/photos?page=3&query=${query}&client_id=PsaLIf-Ej6azZEDQ0plfG6HAc0vP8w5LIDWk7VONObw`);
+    if (query) {
+        response = await fetch(`https://api.unsplash.com/search/photos?page=3&query=${query}&client_id=wpiiT6tN2Rrm_2kKkwi7cT4xAMdPk7Q3KdB1gx4PD5c`);
     } else {
-        response = await fetch(`https://api.unsplash.com/photos/random?count=21&client_id=PsaLIf-Ej6azZEDQ0plfG6HAc0vP8w5LIDWk7VONObw`);
+        response = await fetch(`https://api.unsplash.com/photos/random?count=20&client_id=wpiiT6tN2Rrm_2kKkwi7cT4xAMdPk7Q3KdB1gx4PD5c`);
     }
 
     const data = await response.json();
@@ -40,5 +40,6 @@ const galerySlice = createSlice({
             });
     },
 });
+
 
 export default galerySlice.reducer;

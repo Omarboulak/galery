@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import galerySlice from "./GalerySlice"; // Importamos el slice
+import galerySlice from "./GalerySlice"; 
 
 const store = configureStore({
   reducer: {
-    galery: galerySlice, // Agregamos el slice al store
+    galery: galerySlice, 
   },
 });
 
