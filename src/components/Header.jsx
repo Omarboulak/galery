@@ -3,18 +3,22 @@ import { Link } from 'react-router-dom';
 import Search from "./Search";
 import '../scss/header.scss';
 
-function Header(){
+function Header() {
 
     return (
         <header>
             <div className='menu'>
                 <h1>Galery</h1>
-                <ul>
-                    <li>
-                        <a href="">Home</a>
-                        <a href="">My Photos</a>
-                    </li>
-                </ul>
+                <nav>
+                    <ul>
+                        <li>
+                            <Link to="/galery">Galery</Link>
+                        </li>
+                        <li>
+                            <Link to="/likes">Likes</Link>
+                        </li>
+                    </ul>
+                </nav>
             </div>
 
             <div className="search">

@@ -11,7 +11,9 @@ function Search() {
 
 
     useEffect(() => {
-        dispatch(imgGalery(search));
+        if(search !== ''){
+            dispatch(imgGalery(search));
+        }
     }, [search, dispatch]);  
 
     return (
