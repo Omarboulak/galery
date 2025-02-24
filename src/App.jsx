@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Galery from './components/Galery';
-import Likes from './components/Likes';
+import Likes from './pages/Likes';
 import '../src/scss/styles.scss'
 
 function App() {

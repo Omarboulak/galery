@@ -1,29 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { imgGalery } from "../redux/GalerySlice";
-import { addFavourite, deleteFavourite } from "../redux/favouriteSlice";
+import { deleteFavourite } from "../redux/favouriteSlice";
 import '../scss/galery.scss';
 import pencilIcon from '../assets/pencil.svg';
 import heartIcon from '../assets/heart.svg';
 import heartLikeIcon from '../assets/heart-fill.svg'
 import downloadIcon from '../assets/download.svg';
-import Modal from "./modal";
+import Modal from "../components/modal";
 
-
-const Galery = () => {
+const Likes = () => {
    const dispatch = useDispatch();
-   //galeria de img random
-   const { images, loading, error } = useSelector((state) => state.galery);
-   const [open, setopen] = useState(null);
-
-   //favoritos
    const favourites = useSelector((state) => state.favourites.fav);
-   console.log("Favoritos en Galería:", favourites);
+   const [open, setopen] = useState(null);
+   
 
-   useEffect(() => {
-      dispatch(imgGalery());
-   }, [dispatch]);
-
+   const handleDelete = (img) =>{
+      dispatch(deleteFavourite(img.id))
+   }
 
    const openPopup = (selectImg) => {
       setopen(selectImg);
@@ -33,21 +26,14 @@ const Galery = () => {
       setopen(false);
    };
 
-
-   const handleFavourite = (img) => {
-      if (favourites.some((fav) => fav.id === img.id)) {
-         dispatch(deleteFavourite(img.id));
-      } else {
-         dispatch(addFavourite(img));
-      }
-   };
    return (
       <div className="gallery">
-         {images.map((img) => (
+         { favourites.length === 0 ? <h2>No tienes ninguna imagen guardada</h2> :
+         favourites.map((img) => (
             <div className="gallery__container" key={img.id}>
                <img src={img.urls.small} alt={img.alt_description} />
                <div className="gallery__options">
-                  <button className="save-btn" onClick={() => handleFavourite(img)}>
+                  <button className="save-btn" onClick={() => handleDelete(img)}>
                      <img src={favourites.some((fav) => fav.id === img.id) ? heartLikeIcon : heartIcon} alt="icono de un lapiz" />
                   </button>{/* favourite */}
 
@@ -73,6 +59,6 @@ const Galery = () => {
          )}
       </div>
    );
-};
 
-export default Galery;
+}
+export default Likes;

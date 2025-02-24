@@ -1,8 +1,14 @@
+
 .gallery {
     margin: 0 auto;
     width: 90%;
     grid-auto-rows: auto;
    
+    h2{
+        width: 100%;
+        text-align: center;
+        display: block;
+    }
 
     &__container {
         position: relative;
@@ -14,7 +20,6 @@
         img {
             width: 100%;
             height: auto;
-            margin-bottom: .5rem;
         }
     }
 
