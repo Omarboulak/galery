@@ -1,4 +1,4 @@
-header{
+header {
     background-image: url(../assets/fondo.jpg);
     background-size: contain;
     background-position: center;
@@ -11,15 +11,16 @@ header{
         align-items: center;
         color: white;
 
-        h1{
+        h1 {
             font-family: 'Raleway';
             font-weight: 400;
         }
-    
-        ul{
-            li{
+
+        ul {
+            li {
                 list-style-type: none;
-                a{
+
+                a {
                     text-decoration: none;
                     color: white;
                     padding-left: 2rem;
@@ -27,8 +28,8 @@ header{
             }
         }
     }
-    
-    .search{
+
+    .search {
         padding: 5rem 0;
         display: flex;
         justify-content: center;
@@ -36,12 +37,12 @@ header{
         align-items: center;
         gap: 2rem;
         position: relative;
-    
-        .search-cont{
+
+        .search-cont {
             position: relative;
             width: 70%;
-            
-            input{
+
+            input {
                 width: 100%;
                 border-radius: 22px;
                 border: 1px solid black;
@@ -49,7 +50,7 @@ header{
                 padding-left: 1rem;
             }
 
-            button{
+            button {
                 position: absolute;
                 right: 0;
                 top: 2px;
@@ -59,37 +60,37 @@ header{
                 border: 0;
             }
         }
-    
+
         select {
             width: 50%;
         }
     }
 }
 
-@media only screen and (min-width: 768px) { 
-    header{
+@media only screen and (min-width: 768px) {
+    header {
         background-image: url(../assets/fondo.jpg);
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        
-        .search{
+
+        .search {
             padding: 5rem 0;
             gap: 2rem;
             position: relative;
-            
-            input{
+
+            input {
                 width: 50%;
                 border-radius: 22px;
                 border: 1px solid black;
                 height: 2rem;
             }
-            
+
             select {
                 width: 30%;
             }
-            
-            
+
+
         }
-    } 
+    }
 }

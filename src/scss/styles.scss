@@ -1,7 +1,8 @@
-body{
+@use 'header';
+@use 'galery';
+
+*{
     padding: 0;
     margin: 0;
 }
 
-@use 'header';
-@use 'galery'
