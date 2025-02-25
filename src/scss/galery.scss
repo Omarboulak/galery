@@ -44,6 +44,18 @@
     }
 
 }
+.select_container{
+    width: 100%;
+    margin-bottom: 5rem;
+    display: flex;
+    justify-content: center;
+
+    select {
+        width: 30%;
+    }
+    
+}
+
 
 @media only screen and (min-width: 768px) {
     .gallery {

@@ -38,6 +38,11 @@ const Galery = () => {
       setopen(false);
    };
 
+   const handleDescription = (newDesc) =>{
+      const saveDescription = JSON.parse(localStorage.getItem('description')) || {};
+      saveDescription[images.alt_description] = newDesc
+      localStorage.setItem("description", JSON.stringify(saveDescription));
+   }
 
    const handleFavourite = (img) => {
       if (favourites.some((fav) => fav.id === img.id)) {
@@ -49,11 +54,16 @@ const Galery = () => {
 
    //funcion para ordenar las imagenes
    const orderImages = [...images].sort((a, b) => {
-      if (order === "height") return b.height - a.height;
-      if (order === "likes") return b.likes - a.likes;
-      if (order === "width") return b.width - a.width;
-      if (order === "date") return new Date(b.created_at) - new Date(a.created_at);
-      return 0;
+      if (order === "likes") {
+         return b.likes - a.likes;
+     } else if (order === "height") {
+         return b.height - a.height;
+     } else if (order === "width") {
+         return b.width - a.width;
+     } else if (order === "created_at") {
+         return new Date(b.created_at) - new Date(a.created_at);
+     }
+     return 0;
    });
 
 
@@ -85,8 +95,9 @@ const Galery = () => {
                   height={open.height}
                   likes={open.likes}
                   date={open.created_at}
-                  description={open.description}
+                  description={open.alt_description}
                   closeModal={closePopup}
+                  saveDes={handleDescription(open.alt_description)}
                />
             )}
          </div>

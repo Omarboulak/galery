@@ -49,6 +49,20 @@ button {
         padding: 0.5rem;
     }
 
+    .save{
+        background: none;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 30px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.449);
+        padding: 0.7rem;
+    }
+
+    .save:hover{
+        background-color: rgb(224, 216, 207);
+    }
+
     .close:hover{
         background-color: rgba(44, 205, 84, 0.14);
     }
