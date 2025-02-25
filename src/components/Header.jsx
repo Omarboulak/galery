@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from 'react-router-dom';
 import Search from "./Search";
 import '../scss/header.scss';
+import Select from "./Select";
 
 function Header() {
 
@@ -23,12 +24,6 @@ function Header() {
 
             <div className="search">
                 <Search />
-                <select >
-                    <option value="heigt">heigt</option>
-                    <option value="with">with</option>
-                    <option value="likes">likes</option>
-                    <option value="Date">Date</option>
-                </select>
             </div>
         </header>
     )

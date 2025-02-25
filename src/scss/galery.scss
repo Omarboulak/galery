@@ -1,10 +1,9 @@
-
 .gallery {
     margin: 0 auto;
     width: 90%;
     grid-auto-rows: auto;
-   
-    h2{
+
+    h2 {
         width: 100%;
         text-align: center;
         display: block;
@@ -34,12 +33,12 @@
         width: 100%;
         opacity: 0;
 
-        button{
+        button {
             border: 0;
             background-color: transparent;
         }
     }
-    
+
     &__container:hover &__options {
         opacity: 1;
     }
