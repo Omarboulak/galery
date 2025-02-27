@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { imgGalery } from "../redux/GalerySlice";
 import { addFavourite, deleteFavourite } from "../redux/favouriteSlice";
+import Masonry from "react-masonry-css";
 import '../scss/galery.scss';
 import pencilIcon from '../assets/pencil.svg';
 import heartIcon from '../assets/heart.svg';
@@ -56,22 +57,37 @@ const Galery = () => {
    const orderImages = [...images].sort((a, b) => {
       if (order === "likes") {
          return b.likes - a.likes;
-     } else if (order === "height") {
+      } else if (order === "height") {
          return b.height - a.height;
-     } else if (order === "width") {
+      } else if (order === "width") {
          return b.width - a.width;
-     } else if (order === "created_at") {
+      } else if (order === "created_at") {
          return new Date(b.created_at) - new Date(a.created_at);
-     }
-     return 0;
+      }
+      return 0;
    });
 
+   const openImg = (imageUrl) => {
+      window.open(imageUrl, '_blank');
+   };
+
+
+   const colums = {
+      default: 4, 
+      1200: 3,   
+      700: 2,   
+      500: 1     
+   };
 
    return (
       <div>
          <Select setOrder={setOrder} />
-         <div className="gallery">
-            {orderImages.map((img) => (   
+         <Masonry
+            breakpointCols={colums}
+            className="masonry-grid"
+            columnClassName="masonry-grid_column"
+         >
+            {orderImages.map((img) => (
                <div className="gallery__container" key={img.id}>
                   <img src={img.urls.small} alt={img.alt_description} />
                   <div className="gallery__options">
@@ -83,25 +99,23 @@ const Galery = () => {
                         <img src={pencilIcon} alt="icono de un corazon vacio" />
                      </button>{/* open popup */}
 
-                     <button className="save-btn"><img src={downloadIcon} alt="icono de descargar" /></button>{/* download */}
+                     <button className="download-btn" onClick={() => openImg(img.urls.full)}><img src={downloadIcon} alt="icono de descargar" /></button>{/* download */}
                   </div>
                </div>
             ))}
+         </Masonry>
 
-
-            {open && (
-               <Modal
-                  width={open.width}
-                  height={open.height}
-                  likes={open.likes}
-                  date={open.created_at}
-                  description={open.alt_description}
-                  closeModal={closePopup}
-                  // saveDes={handleDescription(open.alt_description)}
-               />
-            )}
-         </div>
-
+         {open && (
+            <Modal
+               width={open.width}
+               height={open.height}
+               likes={open.likes}
+               date={open.created_at}
+               description={open.alt_description}
+               closeModal={closePopup}
+            // saveDes={handleDescription(open.alt_description)}
+            />
+         )}
       </div>
    )
 };

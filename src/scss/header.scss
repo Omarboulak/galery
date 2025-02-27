@@ -1,9 +1,10 @@
 header {
     background-image: url(../assets/fondo.jpg);
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     margin-bottom: 3rem;
+    padding-top: 0.8rem;
 
     .menu {
         display: flex;
