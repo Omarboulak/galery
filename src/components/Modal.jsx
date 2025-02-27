@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import '../scss/modal.scss';
 
 function Modal({ width, height, likes, date, description, closeModal, save }) {
-    const[edit, setEdit] = useState(description)
-    
+    const [edit, setEdit] = useState(description)
+
+    const handleSave = () => {
+        save(edit);
+        closeModal(); 
+      };
 
     return (
         <div className="modalcontainer">
@@ -16,13 +20,13 @@ function Modal({ width, height, likes, date, description, closeModal, save }) {
                     <li>DATE: {date}</li>
                     <li className="desc">DESCRIPTION:</li>
                 </ul>
-                
-                <textarea 
+
+                <textarea
                     type="text"
-                    value={edit} 
+                    value={edit}
                     onChange={e => setEdit(e.target.value)}
                 />
-                <button className="save" onClick={save}>Save</button>
+                <button className="save" onClick={handleSave}>Save</button>
                 <button className="close" onClick={closeModal}>Cerrar</button>
             </dialog>
         </div>

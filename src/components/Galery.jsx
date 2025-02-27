@@ -38,11 +38,11 @@ const Galery = () => {
       setopen(false);
    };
 
-   const handleDescription = (newDesc) =>{
-      const saveDescription = JSON.parse(localStorage.getItem('description')) || {};
-      saveDescription[images.alt_description] = newDesc
-      localStorage.setItem("description", JSON.stringify(saveDescription));
-   }
+   // const handleDescription = (newDesc) =>{
+   //    const saveDescription = JSON.parse(localStorage.getItem('description')) || {};
+   //    saveDescription[images.alt_description] = newDesc
+   //    localStorage.setItem("description", JSON.stringify(saveDescription));
+   // }
 
    const handleFavourite = (img) => {
       if (favourites.some((fav) => fav.id === img.id)) {
@@ -71,7 +71,7 @@ const Galery = () => {
       <div>
          <Select setOrder={setOrder} />
          <div className="gallery">
-            {orderImages.map((img) => (
+            {orderImages.map((img) => (   
                <div className="gallery__container" key={img.id}>
                   <img src={img.urls.small} alt={img.alt_description} />
                   <div className="gallery__options">
@@ -97,13 +97,13 @@ const Galery = () => {
                   date={open.created_at}
                   description={open.alt_description}
                   closeModal={closePopup}
-                  saveDes={handleDescription(open.alt_description)}
+                  // saveDes={handleDescription(open.alt_description)}
                />
             )}
          </div>
 
       </div>
-   );
+   )
 };
 
 export default Galery;
