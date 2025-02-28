@@ -6,7 +6,7 @@ export const imgGalery = createAsyncThunk("ramdom/imgGalery", async (query) => {
     if (query) {
         response = await fetch(`https://api.unsplash.com/search/photos?page=3&query=${query}&client_id=wpiiT6tN2Rrm_2kKkwi7cT4xAMdPk7Q3KdB1gx4PD5c`);
     } else {
-        response = await fetch(`https://api.unsplash.com/photos/random?count=20&client_id=wpiiT6tN2Rrm_2kKkwi7cT4xAMdPk7Q3KdB1gx4PD5c`);
+        response = await fetch(`https://api.unsplash.com/photos/random?count=23&client_id=wpiiT6tN2Rrm_2kKkwi7cT4xAMdPk7Q3KdB1gx4PD5c`);
     }
 
     const data = await response.json();

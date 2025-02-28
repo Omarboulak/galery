@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { imgGalery } from "../redux/GalerySlice";
+import { saveAs } from "file-saver";
 import { addFavourite, deleteFavourite } from "../redux/favouriteSlice";
 import Masonry from "react-masonry-css";
 import '../scss/galery.scss';
@@ -67,10 +68,9 @@ const Galery = () => {
       return 0;
    });
 
-   const openImg = (imageUrl) => {
-      window.open(imageUrl, '_blank');
+   const downloadImage = (imageUrl, filename) => {
+      saveAs(imageUrl, filename || "unsplash-image.jpg");
    };
-
 
    const colums = {
       default: 4, 
@@ -99,7 +99,7 @@ const Galery = () => {
                         <img src={pencilIcon} alt="icono de un corazon vacio" />
                      </button>{/* open popup */}
 
-                     <button className="download-btn" onClick={() => openImg(img.urls.full)}><img src={downloadIcon} alt="icono de descargar" /></button>{/* download */}
+                     <button className="download-btn" onClick={() => downloadImage(img.urls.full, `unsplash-${img.id}.jpg`)}><img src={downloadIcon} alt="icono de descargar" /></button>{/* download */}
                   </div>
                </div>
             ))}

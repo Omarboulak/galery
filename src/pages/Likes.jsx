@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteFavourite, updateDescription } from "../redux/favouriteSlice";
 import Masonry from "react-masonry-css";
 import '../scss/galery.scss';
+import { saveAs } from "file-saver";
 import pencilIcon from '../assets/pencil.svg';
 import heartIcon from '../assets/heart.svg';
 import heartLikeIcon from '../assets/heart-fill.svg'
@@ -46,7 +47,10 @@ const Likes = () => {
       }
       return 0;
    });
-
+   
+   const downloadImage = (imageUrl, filename) => {
+      saveAs(imageUrl, filename || "unsplash-image.jpg");
+   };
 
    const colums = {
       default: 4,
@@ -75,7 +79,7 @@ const Likes = () => {
                            <img src={pencilIcon} alt="icono de un corazon vacio" />
                         </button>{/* open popup */}
 
-                        <button className="save-btn"><img src={downloadIcon} alt="icono de descargar" /></button>{/* download */}
+                        <button className="save-btn" onClick={() => downloadImage(img.urls.full, `unsplash-${img.id}.jpg`)}><img src={downloadIcon} alt="icono de descargar" /></button>{/* download */}
                      </div>
                   </div>
                ))}
