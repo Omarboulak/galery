@@ -1,15 +1,13 @@
-import React from "react"
+import React from "react";
 import { Link } from 'react-router-dom';
 import Search from "./Search";
 import '../scss/header.scss';
-import Select from "./Select";
 
-function Header() {
-
+function Header({ handleSearch }) { 
     return (
         <header>
             <div className='menu'>
-                <h1>Galery</h1>
+                <h1><Link to="/galery"> Gallery Images</Link></h1>
                 <nav>
                     <ul>
                         <li>
@@ -23,10 +21,10 @@ function Header() {
             </div>
 
             <div className="search">
-                <Search />
+                <Search handleSearch={handleSearch} /> ç
             </div>
         </header>
-    )
+    );
 }
 
 export default Header;

@@ -1,30 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { imgGalery } from "../redux/GalerySlice";
+import React, { useState } from "react";
 import '../scss/header.scss';
+import searchIcon from '../assets/search.svg'
 
-
-function Search() {
-    const dispatch = useDispatch();
-    const { images } = useSelector((state) => state.galery);  
+function Search({ handleSearch }) { 
     const [search, setSearch] = useState('');
 
+    const handleChange = (e) => {
+        setSearch(e.target.value);
+    };
 
-    useEffect(() => {
-        if(search !== ''){
-            dispatch(imgGalery(search));
+    const handleClickEnter = (e) => {
+        if (e.key === 'Enter') {
+            handleSearch(search);
         }
-    }, [search, dispatch]);  
+    }
+    const handleClick = () => {
+        handleSearch(search); 
+    }
 
     return (
-
         <div className="search-cont">
             <input
                 type="text"
                 placeholder="Search"
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}/>
-            <button type="submit"><img src="" alt="" /></button>
+                onChange={handleChange}
+                onKeyDown={handleClickEnter}
+            />
+            <button type="submit" onClick={handleClick}><img src={searchIcon} alt="icino de una lupa" /></button>
         </div>
     );
 }

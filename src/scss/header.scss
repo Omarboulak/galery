@@ -15,6 +15,10 @@ header {
         h1 {
             font-family: 'Raleway';
             font-weight: 400;
+            a{
+                text-decoration: none;  
+                color: white;
+            }
         }
 
         nav ul li {
@@ -46,14 +50,14 @@ header {
                 width: 100%;
                 border-radius: 22px;
                 border: 1px solid black;
-                height: 1.3rem;
+                height: 2.3rem;
                 padding-left: 1rem;
             }
 
             button {
                 position: absolute;
                 right: 0;
-                top: 2px;
+                top: 0.5rem;
                 width: 1.3rem;
                 height: 1.3rem;
                 border-radius: 50%;

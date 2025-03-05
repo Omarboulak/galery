@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { imgGalery } from "../redux/GalerySlice";
+import { imgGalery, imgSearch } from "../redux/GalerySlice";
 import { saveAs } from "file-saver";
 import { addFavourite, deleteFavourite } from "../redux/favouriteSlice";
 import Masonry from "react-masonry-css";
@@ -12,25 +12,28 @@ import downloadIcon from '../assets/download.svg';
 import Modal from "./modal";
 import Select from "./Select";
 
-
-const Galery = () => {
+const Galery = ({ search }) => {
    const dispatch = useDispatch();
-   //galeria de img random
    const { images, loading, error } = useSelector((state) => state.galery);
-   const [open, setopen] = useState(null);//para el modal
-   const [order, setOrder] = useState(''); //para el select
-
-   //favoritos
    const favourites = useSelector((state) => state.favourites.fav);
-   console.log("Favoritos en Galería:", favourites);
+   const [open, setopen] = useState(null);//para el modal
+   const [order, setOrder] = useState('');//para el select
+   const [pages, setPages] = useState(1);//para el scroll infinito
+
 
    useEffect(() => {
-      if (loading === false) {
-
-         dispatch(imgGalery());
+      if (search !== '') {
+         dispatch(imgSearch({ query: search, page: pages }));
+      } else {
+         dispatch(imgGalery(pages));
       }
-   }, [dispatch]);
+   }, [pages, dispatch, search]);
 
+   // Cargar más imágenes
+   const handlePagination = () => {
+      const nextPage = pages + 1;
+      setPages(nextPage);
+   };
 
    const openPopup = (selectImg) => {
       setopen(selectImg);
@@ -40,12 +43,6 @@ const Galery = () => {
       setopen(false);
    };
 
-   // const handleDescription = (newDesc) =>{
-   //    const saveDescription = JSON.parse(localStorage.getItem('description')) || {};
-   //    saveDescription[images.alt_description] = newDesc
-   //    localStorage.setItem("description", JSON.stringify(saveDescription));
-   // }
-
    const handleFavourite = (img) => {
       if (favourites.some((fav) => fav.id === img.id)) {
          dispatch(deleteFavourite(img.id));
@@ -54,7 +51,6 @@ const Galery = () => {
       }
    };
 
-   //funcion para ordenar las imagenes
    const orderImages = [...images].sort((a, b) => {
       if (order === "likes") {
          return b.likes - a.likes;
@@ -68,19 +64,19 @@ const Galery = () => {
       return 0;
    });
 
-   const downloadImage = (imageUrl, filename) => {
-      saveAs(imageUrl, filename || "unsplash-image.jpg");
+   const downloadImage = (imageUrl, imageName) => {
+      saveAs(imageUrl, imageName || "unsplash-image.jpg");
    };
 
    const colums = {
-      default: 4, 
-      1200: 3,   
-      700: 2,   
-      500: 1     
+      default: 4,
+      1200: 3,
+      700: 2,
+      500: 1
    };
 
    return (
-      <div>
+      <div className="container">
          <Select setOrder={setOrder} />
          <Masonry
             breakpointCols={colums}
@@ -93,17 +89,17 @@ const Galery = () => {
                   <div className="gallery__options">
                      <button className="save-btn" onClick={() => handleFavourite(img)}>
                         <img src={favourites.some((fav) => fav.id === img.id) ? heartLikeIcon : heartIcon} alt="icono de un lapiz" />
-                     </button>{/* favourite */}
-
+                     </button>
                      <button className="open" onClick={() => openPopup(img)}>
                         <img src={pencilIcon} alt="icono de un corazon vacio" />
-                     </button>{/* open popup */}
-
-                     <button className="download-btn" onClick={() => downloadImage(img.urls.full, `unsplash-${img.id}.jpg`)}><img src={downloadIcon} alt="icono de descargar" /></button>{/* download */}
+                     </button>
+                     <button className="download-btn" onClick={() => downloadImage(img.urls.full, `unsplash-${img.id}.jpg`)}><img src={downloadIcon} alt="icono de descargar" /></button>
                   </div>
                </div>
             ))}
          </Masonry>
+
+         <button className="loadMore" onClick={handlePagination}>Cargar más</button>
 
          {open && (
             <Modal
@@ -113,11 +109,10 @@ const Galery = () => {
                date={open.created_at}
                description={open.alt_description}
                closeModal={closePopup}
-            // saveDes={handleDescription(open.alt_description)}
             />
          )}
       </div>
-   )
+   );
 };
 
 export default Galery;

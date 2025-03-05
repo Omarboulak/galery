@@ -13,7 +13,7 @@ function Modal({ width, height, likes, date, description, closeModal, save }) {
         <div className="modalcontainer">
             <dialog className="modal" open>
                 <ul>
-                    <li>Propiedades de la img</li>
+                    {/* <li>Propiedades de la img</li> */}
                     <li>WIDTH: {width}</li>
                     <li>HEIGHT: {height}</li>
                     <li>LIKES: {likes}</li>

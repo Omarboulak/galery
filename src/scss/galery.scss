@@ -1,24 +1,21 @@
 .masonry-grid {
     display: flex;
-    margin-left: -10px; // Ajusta el espacio entre columnas
+    margin-left: -10px;
     width: auto;
     margin: 0 auto;
-    width: 90%;
- }
- 
- .masonry-grid_column {
-    padding-left: 10px; // Espacio entre columnas
+    width: 95%;
+}
+
+.masonry-grid_column {
+    padding-left: 10px;
     background-clip: padding-box;
- }
- 
-
-
+}
 
 .gallery {
     margin: 0 auto;
     width: 90%;
     grid-auto-rows: auto;
-    
+
 
     h2 {
         width: 100%;
@@ -62,7 +59,8 @@
     }
 
 }
-.select_container{
+
+.select_container {
     width: 100%;
     margin-bottom: 5rem;
     display: flex;
@@ -71,7 +69,20 @@
     select {
         width: 30%;
     }
-    
+
+}
+
+.container {
+    text-align: center;
+
+    .loadMore {
+        width: 50%;
+        padding: 1rem 0;
+        border-radius: 16px;
+        border: 0.5px solid black;
+        background: #d6e5e0;
+        margin-top: 2rem;
+    }
 }
 
 

@@ -13,10 +13,11 @@ button {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    text-align: left;
 
     .modal {
         background: white;
-        padding: 1.8rem;
+        padding: 3.8rem 1.8rem 1.8rem;
         border-radius: 8px;
         max-width: 40rem;
         width: 100%;
