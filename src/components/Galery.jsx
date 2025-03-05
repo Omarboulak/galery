@@ -4,6 +4,7 @@ import { imgGalery, imgSearch } from "../redux/GalerySlice";
 import { saveAs } from "file-saver";
 import { addFavourite, deleteFavourite } from "../redux/favouriteSlice";
 import Masonry from "react-masonry-css";
+import InfiniteScroll from "react-infinite-scroll-component";
 import '../scss/galery.scss';
 import pencilIcon from '../assets/pencil.svg';
 import heartIcon from '../assets/heart.svg';
@@ -78,28 +79,34 @@ const Galery = ({ search }) => {
    return (
       <div className="container">
          <Select setOrder={setOrder} />
-         <Masonry
-            breakpointCols={colums}
-            className="masonry-grid"
-            columnClassName="masonry-grid_column"
+         <InfiniteScroll
+            dataLength={images.length}
+            next={handlePagination}
+            hasMore={true}
+            loader={<h4>Loading...</h4>}
          >
-            {orderImages.map((img) => (
-               <div className="gallery__container" key={img.id}>
-                  <img src={img.urls.small} alt={img.alt_description} />
-                  <div className="gallery__options">
-                     <button className="save-btn" onClick={() => handleFavourite(img)}>
-                        <img src={favourites.some((fav) => fav.id === img.id) ? heartLikeIcon : heartIcon} alt="icono de un lapiz" />
-                     </button>
-                     <button className="open" onClick={() => openPopup(img)}>
-                        <img src={pencilIcon} alt="icono de un corazon vacio" />
-                     </button>
-                     <button className="download-btn" onClick={() => downloadImage(img.urls.full, `unsplash-${img.id}.jpg`)}><img src={downloadIcon} alt="icono de descargar" /></button>
+            <Masonry
+               breakpointCols={colums}
+               className="masonry-grid"
+               columnClassName="masonry-grid_column"
+            >
+               {orderImages.map((img) => (
+                  <div className="gallery__container" key={img.id}>
+                     <img src={img.urls.small} alt={img.alt_description} />
+                     <div className="gallery__options">
+                        <button className="save-btn" onClick={() => handleFavourite(img)}>
+                           <img src={favourites.some((fav) => fav.id === img.id) ? heartLikeIcon : heartIcon} alt="icono de un lapiz" />
+                        </button>
+                        <button className="open" onClick={() => openPopup(img)}>
+                           <img src={pencilIcon} alt="icono de un corazon vacio" />
+                        </button>
+                        <button className="download-btn" onClick={() => downloadImage(img.urls.full, `unsplash-${img.id}.jpg`)}><img src={downloadIcon} alt="icono de descargar" /></button>
+                     </div>
                   </div>
-               </div>
-            ))}
-         </Masonry>
+               ))}
+            </Masonry>
+         </InfiniteScroll>
 
-         <button className="loadMore" onClick={handlePagination}>Cargar más</button>
 
          {open && (
             <Modal
