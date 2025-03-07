@@ -2,7 +2,7 @@ import React from "react";
 
 function Select({ setOrder }) {
     const options = [
-        {value: '', label: 'Elige una opcion...'},
+        {value: '', label: 'Ordenar mayor que...'},
         {value: 'width', label: 'Width'},
         {value: 'height', label: 'Height'},
         {value: 'likes', label: 'Likes'},

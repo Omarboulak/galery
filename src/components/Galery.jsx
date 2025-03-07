@@ -36,7 +36,11 @@ const Galery = ({ search }) => {
       if (search !== reset) {
          setPages(1);
          dispatch(resetImages());
-         dispatch(imgSearch({ query: search, page: 1 }));
+         if (search !== '') {
+            dispatch(imgSearch({ query: search, page: 1 }));
+         } else {
+            dispatch(imgGalery(1));
+         }
          setReset(search);
       }
    }, [search, dispatch, reset]);
