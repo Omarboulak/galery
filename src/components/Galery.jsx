@@ -1,48 +1,64 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { imgGalery, imgSearch } from "../redux/GalerySlice";
+import { imgGalery, imgSearch, resetImages } from "../redux/GalerySlice";
 import { saveAs } from "file-saver";
 import { addFavourite, deleteFavourite } from "../redux/favouriteSlice";
+
+//librerias 
 import Masonry from "react-masonry-css";
 import InfiniteScroll from "react-infinite-scroll-component";
+import ScrollToTop from "react-scroll-to-top";
+
+//imagenes
 import '../scss/galery.scss';
 import pencilIcon from '../assets/pencil.svg';
 import heartIcon from '../assets/heart.svg';
-import heartLikeIcon from '../assets/heart-fill.svg'
+import heartLikeIcon from '../assets/heart-fill.svg';
 import downloadIcon from '../assets/download.svg';
+import up from '../assets/up.svg'
+
+//componentes
 import Modal from "./modal";
 import Select from "./Select";
+
 
 const Galery = ({ search }) => {
    const dispatch = useDispatch();
    const { images, loading, error } = useSelector((state) => state.galery);
    const favourites = useSelector((state) => state.favourites.fav);
-   const [open, setopen] = useState(null);//para el modal
-   const [order, setOrder] = useState('');//para el select
-   const [pages, setPages] = useState(1);//para el scroll infinito
+   const [open, setOpen] = useState(null); // Modal
+   const [order, setOrder] = useState(''); // Select
+   const [pages, setPages] = useState(1); // Scroll infinito
+   const [reset, setReset] = useState(search);
+
+   //para hacer el reset de las paginas cuando hago una busqueda
+   useEffect(() => {
+      if (search !== reset) {
+         setPages(1);
+         dispatch(resetImages());
+         dispatch(imgSearch({ query: search, page: 1 }));
+         setReset(search);
+      }
+   }, [search, dispatch, reset]);
 
 
    useEffect(() => {
-      if (search !== '') {
-         dispatch(imgSearch({ query: search, page: pages }));
-      } else {
-         dispatch(imgGalery(pages));
+      if (pages >= 1) {
+         if (search !== '') {
+            dispatch(imgSearch({ query: search, page: pages }));
+         } else {
+            dispatch(imgGalery(pages));
+         }
       }
    }, [pages, dispatch, search]);
 
-   // Cargar más imágenes
+   // Cargar más imágenes al hacer scroll
    const handlePagination = () => {
-      const nextPage = pages + 1;
-      setPages(nextPage);
+      setPages((prev) => prev + 1);
    };
 
-   const openPopup = (selectImg) => {
-      setopen(selectImg);
-   };
-
-   const closePopup = () => {
-      setopen(false);
-   };
+   const openPopup = (selectImg) => setOpen(selectImg);
+   const closePopup = () => setOpen(false);
 
    const handleFavourite = (img) => {
       if (favourites.some((fav) => fav.id === img.id)) {
@@ -53,17 +69,19 @@ const Galery = ({ search }) => {
    };
 
    const orderImages = [...images].sort((a, b) => {
-      if (order === "likes") {
-         return b.likes - a.likes;
-      } else if (order === "height") {
-         return b.height - a.height;
-      } else if (order === "width") {
-         return b.width - a.width;
-      } else if (order === "created_at") {
-         return new Date(b.created_at) - new Date(a.created_at);
-      }
+      if (order === "likes") return b.likes - a.likes;
+      if (order === "height") return b.height - a.height;
+      if (order === "width") return b.width - a.width;
+      if (order === "created_at") return new Date(b.created_at) - new Date(a.created_at);
       return 0;
    });
+
+
+   const handleback = () => {
+      const scrollPercentage = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      window.scrollTo(0, 0)
+      return scrollPercentage
+   }
 
    const downloadImage = (imageUrl, imageName) => {
       saveAs(imageUrl, imageName || "unsplash-image.jpg");
@@ -72,8 +90,8 @@ const Galery = ({ search }) => {
    const colums = {
       default: 4,
       1200: 3,
-      700: 2,
-      500: 1
+      768: 2,
+      480: 1
    };
 
    return (
@@ -100,13 +118,22 @@ const Galery = ({ search }) => {
                         <button className="open" onClick={() => openPopup(img)}>
                            <img src={pencilIcon} alt="icono de un corazon vacio" />
                         </button>
-                        <button className="download-btn" onClick={() => downloadImage(img.urls.full, `unsplash-${img.id}.jpg`)}><img src={downloadIcon} alt="icono de descargar" /></button>
+                        <button className="download-btn" onClick={() => downloadImage(img.urls.full, `unsplash-${img.id}.jpg`)}>
+                           <img src={downloadIcon} alt="icono de descargar" />
+                        </button>
                      </div>
                   </div>
                ))}
             </Masonry>
-         </InfiniteScroll>
+            <ScrollToTop
+               smooth
+               top={20}
+               color="white"
+               className="backTop"
+               style={{ backgroundColor: "black", borderRadius: "50%" }}
+            />
 
+         </InfiniteScroll>
 
          {open && (
             <Modal

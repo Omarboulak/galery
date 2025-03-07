@@ -21,7 +21,11 @@ const initialState = {
 const galerySlice = createSlice({
     name: "galery",
     initialState,
-    reducers: {},
+    reducers: {
+        resetImages: (state) => {
+            state.images = []
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(imgGalery.pending, (state) => {

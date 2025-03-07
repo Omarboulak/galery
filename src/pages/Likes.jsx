@@ -11,11 +11,23 @@ import downloadIcon from '../assets/download.svg';
 import Modal from "../components/modal";
 import Select from "../components/Select";
 
-const Likes = () => {
+const Likes = ({search}) => {
    const dispatch = useDispatch();
    const favourites = useSelector((state) => state.favourites.fav);
    const [open, setopen] = useState(null);
    const [order, setOrder] = useState(''); //para el select
+   const [filter, setFilter] = useState([]);
+
+   useEffect(() => {
+      if (search === '') {
+         setFilter(favourites)         
+      } else {
+         const filterFav = favourites.filter(img =>{
+           return img.alt_description?.toLowerCase().includes(search.toLowerCase())
+         })
+         setFilter(filterFav)
+      }
+   }, [search, favourites])
 
    const handleDelete = (img) => {
       dispatch(deleteFavourite(img.id))
@@ -35,7 +47,7 @@ const Likes = () => {
 
 
    //funcion para ordenar las imagenes
-   const orderImages = [...favourites].sort((a, b) => {
+   const orderImages = [...filter].sort((a, b) => {
       if (order === "likes") {
          return b.likes - a.likes;
       } else if (order === "height") {
@@ -66,7 +78,7 @@ const Likes = () => {
             className="masonry-grid"
             columnClassName="masonry-grid_column"
          >
-            {favourites.length === 0 ? <h2>No tienes ninguna imagen guardada</h2> :
+            {filter.length === 0 ? <h2>No tienes ninguna imagen guardada</h2> :
                orderImages.map((img) => (
                   <div className="gallery__container" key={img.id}>
                      <img src={img.urls.small} alt={img.alt_description} />

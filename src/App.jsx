@@ -19,7 +19,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Galery search={search} />} /> 
                     <Route path="/galery" element={<Galery search={search} />} />
-                    <Route path="/likes" element={<Likes />} />
+                    <Route path="/likes" element={<Likes search={search}/>} />
                 </Routes>
             </main>
         </Router>
