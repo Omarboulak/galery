@@ -8,8 +8,8 @@ import pencilIcon from '../assets/pencil.svg';
 import heartIcon from '../assets/heart.svg';
 import heartLikeIcon from '../assets/heart-fill.svg'
 import downloadIcon from '../assets/download.svg';
-import Modal from "../components/modal";
 import Select from "../components/Select";
+import Modal from "../components/Modal";
 
 const Likes = ({search}) => {
    const dispatch = useDispatch();

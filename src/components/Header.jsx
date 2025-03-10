@@ -21,7 +21,7 @@ function Header({ handleSearch }) {
             </div>
 
             <div className="search">
-                <Search handleSearch={handleSearch} /> ç
+                <Search handleSearch={handleSearch} /> 
             </div>
         </header>
     );
