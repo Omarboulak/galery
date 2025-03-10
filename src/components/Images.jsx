@@ -10,7 +10,7 @@ import heartLikeIcon from '../assets/heart-fill.svg';
 import downloadIcon from '../assets/download.svg';
 
 
-function Images({img, openPopup, handleFavourite}) {
+function Images({img, openPopup}) {
     const favourites = useSelector((state) => state.favourites.fav);
     const [open, setOpen] = useState(null); // Modal
     const dispatch = useDispatch();
