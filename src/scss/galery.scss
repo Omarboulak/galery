@@ -51,12 +51,17 @@
         button {
             border: 0;
             background-color: transparent;
+            display: none;
         }
     }
 
     &__container:hover &__options {
         opacity: 1;
     }
+    &__container:hover &__options button{
+        display: block;
+    }
+
 
 }
 

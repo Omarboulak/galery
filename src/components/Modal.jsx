@@ -7,23 +7,23 @@ function Modal({ width, height, likes, date, description, closeModal, save }) {
     const location = useLocation();
     console.log(location.pathname);
 
+    const formatDate = new Date(date).toLocaleDateString()
+
     const handleSave = () => {
         save(edit);
         closeModal();
     };
     useEffect(() => {
-        console.log(' se esta actualizando');
     }, [location])
     
     return (
         <div className="modalcontainer">
             <dialog className="modal" open>
                 <ul>
-                    {/* <li>Propiedades de la img</li> */}
                     <li>WIDTH: {width}</li>
                     <li>HEIGHT: {height}</li>
                     <li>LIKES: {likes}</li>
-                    <li>DATE: {date}</li>
+                    <li>DATE: {formatDate}</li>
                     <li className="desc">DESCRIPTION:</li>
                 </ul>
 
@@ -32,9 +32,7 @@ function Modal({ width, height, likes, date, description, closeModal, save }) {
                     value={edit}
                     onChange={e => setEdit(e.target.value)}
                 />
-                {location.pathname === '/galery' ? null : <button className="save" onClick={handleSave}>Save</button>}
-                {console.log(location)}
-                
+                {location.pathname === '/galery' ? null : <button className="save" onClick={handleSave}>Save</button>}                
                 <button className="close" onClick={closeModal}>Cerrar</button>
             </dialog>
         </div>
