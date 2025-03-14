@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Search from "./Search";
 import '../scss/header.scss';
 
-function Header({ handleSearch }) { 
+function Header({ setGalerySearch, setLikesSearch }) { 
     return (
         <header>
             <div className='menu'>
@@ -21,7 +21,7 @@ function Header({ handleSearch }) {
             </div>
 
             <div className="search">
-                <Search handleSearch={handleSearch} /> 
+                <Search setGalerySearch={setGalerySearch} setLikesSearch={setLikesSearch}/> 
             </div>
         </header>
     );

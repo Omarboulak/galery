@@ -5,14 +5,13 @@ import { useLocation } from "react-router-dom";
 function Modal({ width, height, likes, date, description, closeModal, save }) {
     const [edit, setEdit] = useState(description)
     const location = useLocation();
-    console.log(location.pathname);
-
     const formatDate = new Date(date).toLocaleDateString()
 
     const handleSave = () => {
-        save(edit);
-        closeModal();
-    };
+        save(edit);           
+        closeModal();         
+    };                        
+ 
     useEffect(() => {
     }, [location])
     
